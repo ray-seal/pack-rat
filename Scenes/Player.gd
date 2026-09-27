@@ -5,6 +5,7 @@ const JUMP_VELOCITY = 4.5
 const MOUSE_SENSITIVITY = 0.002
 
 @onready var head = $Head
+@onready var shop_phone = get_node("../UI/ShopPhone")
 
 var camera_pitch = 0.0
 
@@ -23,11 +24,21 @@ func _unhandled_input(event):
 
 			head.rotation.x = camera_pitch
 
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_ESCAPE:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_E:
+			toggle_phone()
+
+		elif event.keycode == KEY_ESCAPE:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
+func toggle_phone():
+	shop_phone.visible = not shop_phone.visible
+
+	if shop_phone.visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 func _physics_process(delta):
 	# Gravity
 	if not is_on_floor():

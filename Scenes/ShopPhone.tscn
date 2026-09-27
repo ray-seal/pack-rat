@@ -1,3 +1,92 @@
 [gd_scene format=3 uid="uid://c2jjyh2ifvq0p"]
 
-[node name="ShopPhone" type="Node2D" unique_id=1689065131]
+[node name="ShopPhone" type="Control" unique_id=329718463]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Phone" type="Panel" parent="." unique_id=486010108]
+layout_mode = 0
+offset_right = 420.0
+offset_bottom = 760.0
+
+[node name="Screen" type="Panel" parent="Phone" unique_id=365226781]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -340.0
+offset_right = 190.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PhoneTitle" type="Label" parent="Phone/Screen" unique_id=74288408]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 354.0
+offset_bottom = 65.0
+text = "PACK RAT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HomeScreen" type="GridContainer" parent="Phone/Screen" unique_id=348548478]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 71.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="CollectionButton" type="Button" parent="Phone/Screen/HomeScreen" unique_id=972443548]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+text = "Collection"
+
+[node name="GradingButton" type="Button" parent="Phone/Screen/HomeScreen" unique_id=1399219247]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+text = "Grading
+"
+
+[node name="MarketplaceButton" type="Button" parent="Phone/Screen/HomeScreen" unique_id=1837198823]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+text = "Marketplace"
+
+[node name="StockButton" type="Button" parent="Phone/Screen/HomeScreen" unique_id=1076375661]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+text = "Stock
+"
+
+[node name="ShopButton" type="Button" parent="Phone/Screen/HomeScreen" unique_id=1814978340]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+text = "Shop"
+
+[node name="OrdersButton" type="Button" parent="Phone/Screen/HomeScreen" unique_id=158401075]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+text = "Orders"
+
+[node name="ContactsButton" type="Button" parent="Phone/Screen/HomeScreen" unique_id=317086013]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+text = "Contacts"
+
+[node name="BankButton" type="Button" parent="Phone/Screen/HomeScreen" unique_id=1382148790]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+text = "Banking"
