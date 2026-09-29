@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dh1mb7kpbq7ho" path="res://StoreAssets/Wallpaper.png" id="2_huyxd"]
 [ext_resource type="Texture2D" uid="uid://cmcupxi33si2x" path="res://StoreAssets/StockRoomWallpaper.jpg" id="5_ne8o5"]
 [ext_resource type="Texture2D" uid="uid://byi3ypq363juu" path="res://StoreAssets/StockRoomFloor.jpg" id="6_7iuwd"]
+[ext_resource type="PackedScene" uid="uid://bwlqpxtfgytql" path="res://StoreAssets/NPC/Gunter/GunterIdle.glb" id="7_7iuwd"]
+[ext_resource type="Script" uid="uid://qsdnfjjmpd5t" path="res://StoreAssets/NPC/Gunter/gunter_idle.gd" id="8_nxxjm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huyxd"]
 albedo_texture = ExtResource("1_fy3ub")
@@ -139,3 +141,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -0.1, -11.364454)
 material_override = SubResource("StandardMaterial3D_a4djp")
 use_collision = true
 size = Vector3(12, 0.2, 12)
+
+[node name="GunterIdle" parent="." unique_id=1120780205 instance=ExtResource("7_7iuwd")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 3.2457657, 0.003385824, -1.7183018)
+script = ExtResource("8_nxxjm")
