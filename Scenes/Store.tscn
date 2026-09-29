@@ -1,37 +1,92 @@
 [gd_scene format=3 uid="uid://cr5fdytl4oq8i"]
 
+[ext_resource type="Texture2D" uid="uid://dbd3wbbqe5rr2" path="res://StoreAssets/Carpet.png" id="1_fy3ub"]
 [ext_resource type="PackedScene" uid="uid://dujynxiyoopdg" path="res://Scenes/Player.tscn" id="1_voxcw"]
 [ext_resource type="PackedScene" uid="uid://c2jjyh2ifvq0p" path="res://Scenes/ShopPhone.tscn" id="2_2s633"]
+[ext_resource type="Texture2D" uid="uid://dh1mb7kpbq7ho" path="res://StoreAssets/Wallpaper.png" id="2_huyxd"]
+[ext_resource type="Texture2D" uid="uid://cmcupxi33si2x" path="res://StoreAssets/StockRoomWallpaper.jpg" id="5_ne8o5"]
+[ext_resource type="Texture2D" uid="uid://byi3ypq363juu" path="res://StoreAssets/StockRoomFloor.jpg" id="6_7iuwd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huyxd"]
+albedo_texture = ExtResource("1_fy3ub")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbsj4"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ne8o5"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7iuwd"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxxjm"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uiexh"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jycxk"]
+albedo_texture = ExtResource("5_ne8o5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g84sd"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s40j1"]
+albedo_texture = ExtResource("5_ne8o5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgl0o"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_br8al"]
+albedo_texture = ExtResource("5_ne8o5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bosbd"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ojaad"]
+albedo_texture = ExtResource("5_ne8o5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6qn6"]
+albedo_texture = ExtResource("2_huyxd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4djp"]
+albedo_texture = ExtResource("6_7iuwd")
 
 [node name="Store" type="Node3D" unique_id=1392224250]
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=2090890442]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+material_override = SubResource("StandardMaterial3D_huyxd")
 use_collision = true
 size = Vector3(24, 0.2, 18)
 
 [node name="BackWall" type="CSGBox3D" parent="." unique_id=1764213951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -9)
+material_override = SubResource("StandardMaterial3D_sbsj4")
 use_collision = true
 size = Vector3(24, 3, 0.3)
 
 [node name="LeftWall" type="CSGBox3D" parent="." unique_id=2053197444]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 2)
+material_override = SubResource("StandardMaterial3D_ne8o5")
 use_collision = true
-size = Vector3(0.3, 3, 18)
+size = Vector3(0.3, 3, 15)
 
 [node name="RightWall" type="CSGBox3D" parent="." unique_id=1006443199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_7iuwd")
 use_collision = true
 size = Vector3(0.3, 3, 18)
 
 [node name="FrontWallLeft" type="CSGBox3D" parent="." unique_id=173484723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.5, 9)
+material_override = SubResource("StandardMaterial3D_nxxjm")
 use_collision = true
 size = Vector3(9.5, 3, 0.3)
 
 [node name="FrontWallRight" type="CSGBox3D" parent="." unique_id=1207945618]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.5, 9)
+material_override = SubResource("StandardMaterial3D_uiexh")
 use_collision = true
 size = Vector3(9.5, 3, 0.3)
 
@@ -50,3 +105,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
 
 [node name="ShopPhone" parent="UI" unique_id=329718463 instance=ExtResource("2_2s633")]
 visible = false
+
+[node name="StockRoomLeftWall" type="CSGBox3D" parent="." unique_id=303723645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.017, 1.5, -11.364454)
+material_override = SubResource("StandardMaterial3D_jycxk")
+use_collision = true
+size = Vector3(0.3, 3, 12)
+material = SubResource("StandardMaterial3D_g84sd")
+
+[node name="StockRoomRightWall" type="CSGBox3D" parent="." unique_id=495380900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -13.0546875)
+material_override = SubResource("StandardMaterial3D_s40j1")
+use_collision = true
+size = Vector3(0.3, 3, 8.390625)
+material = SubResource("StandardMaterial3D_sgl0o")
+
+[node name="StockRoomFrontWall" type="CSGBox3D" parent="." unique_id=1784360648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1.5, -5.3644543)
+material_override = SubResource("StandardMaterial3D_br8al")
+use_collision = true
+size = Vector3(12, 3, 0.3)
+material = SubResource("StandardMaterial3D_bosbd")
+
+[node name="StockRoomBackWall" type="CSGBox3D" parent="." unique_id=774238363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1.5, -17.364454)
+material_override = SubResource("StandardMaterial3D_ojaad")
+use_collision = true
+size = Vector3(12, 3, 0.3)
+material = SubResource("StandardMaterial3D_s6qn6")
+
+[node name="StockRoomFloor" type="CSGBox3D" parent="." unique_id=2005569616]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -0.1, -11.364454)
+material_override = SubResource("StandardMaterial3D_a4djp")
+use_collision = true
+size = Vector3(12, 0.2, 12)
