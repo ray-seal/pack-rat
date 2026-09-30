@@ -1,0 +1,31 @@
+ Scenes/Store.tscn                                  |  11 [32m+++++[m
+ StoreAssets/NPC/Gunter/GunterSitIdle.glb           | Bin [31m0[m -> [32m3498756[m bytes
+ StoreAssets/NPC/Gunter/GunterSitIdle.glb.import    |  45 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterSitIdle_Boss_diffuse.png      | Bin [31m0[m -> [32m917510[m bytes
+ .../Gunter/GunterSitIdle_Boss_diffuse.png.import   |  44 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterSitIdle_Boss_normal.png       | Bin [31m0[m -> [32m962700[m bytes
+ .../Gunter/GunterSitIdle_Boss_normal.png.import    |  44 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterSitIdle_Boss_specular.png     | Bin [31m0[m -> [32m673742[m bytes
+ .../Gunter/GunterSitIdle_Boss_specular.png.import  |  43 [32m+++++++++++++++++++[m
+ StoreAssets/NPC/Gunter/GunterSitToStand.glb        | Bin [31m0[m -> [32m3358536[m bytes
+ StoreAssets/NPC/Gunter/GunterSitToStand.glb.import |  45 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterSitToStand_Boss_diffuse.png   | Bin [31m0[m -> [32m917510[m bytes
+ .../GunterSitToStand_Boss_diffuse.png.import       |  44 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterSitToStand_Boss_normal.png    | Bin [31m0[m -> [32m962700[m bytes
+ .../Gunter/GunterSitToStand_Boss_normal.png.import |  44 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterSitToStand_Boss_specular.png  | Bin [31m0[m -> [32m673742[m bytes
+ .../GunterSitToStand_Boss_specular.png.import      |  43 [32m+++++++++++++++++++[m
+ StoreAssets/NPC/Gunter/GunterStandToSit.glb        | Bin [31m0[m -> [32m3347456[m bytes
+ StoreAssets/NPC/Gunter/GunterStandToSit.glb.import |  45 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterStandToSit_Boss_diffuse.png   | Bin [31m0[m -> [32m917510[m bytes
+ .../GunterStandToSit_Boss_diffuse.png.import       |  44 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterStandToSit_Boss_normal.png    | Bin [31m0[m -> [32m962700[m bytes
+ .../Gunter/GunterStandToSit_Boss_normal.png.import |  44 [32m++++++++++++++++++++[m
+ .../NPC/Gunter/GunterStandToSit_Boss_specular.png  | Bin [31m0[m -> [32m673742[m bytes
+ .../GunterStandToSit_Boss_specular.png.import      |  43 [32m+++++++++++++++++++[m
+ StoreAssets/NPC/Gunter/GuntersStool.fbx            | Bin [31m0[m -> [32m1636668[m bytes
+ StoreAssets/NPC/Gunter/GuntersStool.fbx.import     |  46 [32m+++++++++++++++++++++[m
+ StoreAssets/NPC/Gunter/gunter_idle.gd              |   4 [32m+[m[31m-[m
+ StoreAssets/NPC/Gunter/gunter_sit_idle.gd          |   9 [32m++++[m
+ StoreAssets/NPC/Gunter/gunter_sit_idle.gd.uid      |   1 [32m+[m
+ 30 files changed, 597 insertions(+), 2 deletions(-)
