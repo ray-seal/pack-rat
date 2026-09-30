@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://duyhmgeno66dj"
-path.s3tc="res://.godot/imported/GunterWalk_Boss_normal.png-56c4b7a41b9419250bee5eec48e3af9c.s3tc.ctex"
+path.etc2="res://.godot/imported/GunterWalk_Boss_normal.png-56c4b7a41b9419250bee5eec48e3af9c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://StoreAssets/NPC/Gunter/GunterWalk_Boss_normal.png"
-dest_files=["res://.godot/imported/GunterWalk_Boss_normal.png-56c4b7a41b9419250bee5eec48e3af9c.s3tc.ctex"]
+dest_files=["res://.godot/imported/GunterWalk_Boss_normal.png-56c4b7a41b9419250bee5eec48e3af9c.etc2.ctex"]
 
 [params]
 

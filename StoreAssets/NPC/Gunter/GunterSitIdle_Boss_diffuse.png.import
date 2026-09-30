@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwwst075ocx3k"
-path.s3tc="res://.godot/imported/GunterSitIdle_Boss_diffuse.png-1e75160b4ec0a9e6b2b7bc58265c2b91.s3tc.ctex"
+path.etc2="res://.godot/imported/GunterSitIdle_Boss_diffuse.png-1e75160b4ec0a9e6b2b7bc58265c2b91.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://StoreAssets/NPC/Gunter/GunterSitIdle_Boss_diffuse.png"
-dest_files=["res://.godot/imported/GunterSitIdle_Boss_diffuse.png-1e75160b4ec0a9e6b2b7bc58265c2b91.s3tc.ctex"]
+dest_files=["res://.godot/imported/GunterSitIdle_Boss_diffuse.png-1e75160b4ec0a9e6b2b7bc58265c2b91.etc2.ctex"]
 
 [params]
 
