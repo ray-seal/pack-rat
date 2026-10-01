@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1qv4wisxqfbn"
-path.etc2="res://.godot/imported/GunterSitIdle_Boss_normal.png-718a2f1ce25983f0543409bd8f73ad89.etc2.ctex"
+uid="uid://xdoimk2j1nc3"
+path.etc2="res://.godot/imported/Pixel_0.webp-b80807ae79375be059b7ad8223b5e9d0.etc2.ctex"
 metadata={
 "imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "8496ffc1a75e26eb7af32b0da8fd88bf"
+"md5": "b40e5e5b06924f8e5b5ebe46bf38201a"
 }
 
 [deps]
 
-source_file="res://StoreAssets/NPC/Gunter/GunterSitIdle_Boss_normal.png"
-dest_files=["res://.godot/imported/GunterSitIdle_Boss_normal.png-718a2f1ce25983f0543409bd8f73ad89.etc2.ctex"]
+source_file="res://PlayerAssets/Pixel_0.webp"
+dest_files=["res://.godot/imported/Pixel_0.webp-b80807ae79375be059b7ad8223b5e9d0.etc2.ctex"]
 
 [params]
 
@@ -25,12 +25,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://StoreAssets/NPC/Gunter/GunterSitIdle_Boss_normal.png"
+roughness/mode=0
+roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

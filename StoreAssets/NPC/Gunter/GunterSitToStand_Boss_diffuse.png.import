@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3aehfehfxjcp"
-path.s3tc="res://.godot/imported/GunterSitToStand_Boss_diffuse.png-0cdc56c5638578f0bc69ecf7fe220d74.s3tc.ctex"
+path.etc2="res://.godot/imported/GunterSitToStand_Boss_diffuse.png-0cdc56c5638578f0bc69ecf7fe220d74.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://StoreAssets/NPC/Gunter/GunterSitToStand_Boss_diffuse.png"
-dest_files=["res://.godot/imported/GunterSitToStand_Boss_diffuse.png-0cdc56c5638578f0bc69ecf7fe220d74.s3tc.ctex"]
+dest_files=["res://.godot/imported/GunterSitToStand_Boss_diffuse.png-0cdc56c5638578f0bc69ecf7fe220d74.etc2.ctex"]
 
 [params]
 

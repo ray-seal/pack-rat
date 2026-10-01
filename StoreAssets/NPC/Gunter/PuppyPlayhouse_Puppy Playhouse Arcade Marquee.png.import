@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddx3efi7ltfc3"
-path.s3tc="res://.godot/imported/PuppyPlayhouse_Puppy Playhouse Arcade Marquee.png-fb27444acc3d13633b8979194ba5080d.s3tc.ctex"
+path.etc2="res://.godot/imported/PuppyPlayhouse_Puppy Playhouse Arcade Marquee.png-fb27444acc3d13633b8979194ba5080d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://StoreAssets/NPC/Gunter/PuppyPlayhouse_Puppy Playhouse Arcade Marquee.png"
-dest_files=["res://.godot/imported/PuppyPlayhouse_Puppy Playhouse Arcade Marquee.png-fb27444acc3d13633b8979194ba5080d.s3tc.ctex"]
+dest_files=["res://.godot/imported/PuppyPlayhouse_Puppy Playhouse Arcade Marquee.png-fb27444acc3d13633b8979194ba5080d.etc2.ctex"]
 
 [params]
 
