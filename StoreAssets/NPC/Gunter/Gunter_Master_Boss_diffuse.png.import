@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sst2jxxjbpg7"
-path.etc2="res://.godot/imported/Gunter_Master_Boss_diffuse.png-109aa0b28c80c59b34e522ee73f194be.etc2.ctex"
+path.s3tc="res://.godot/imported/Gunter_Master_Boss_diffuse.png-109aa0b28c80c59b34e522ee73f194be.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://StoreAssets/NPC/Gunter/Gunter_Master_Boss_diffuse.png"
-dest_files=["res://.godot/imported/Gunter_Master_Boss_diffuse.png-109aa0b28c80c59b34e522ee73f194be.etc2.ctex"]
+dest_files=["res://.godot/imported/Gunter_Master_Boss_diffuse.png-109aa0b28c80c59b34e522ee73f194be.s3tc.ctex"]
 
 [params]
 

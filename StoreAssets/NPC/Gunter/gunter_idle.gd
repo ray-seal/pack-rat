@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 @onready var animation_player: AnimationPlayer = find_child("AnimationPlayer", true)
 
@@ -8,7 +8,7 @@ const SIT_IDLE := "Gunter_Sitting_Idle"
 const BREATHING_IDLE := "Breathing_Idle"
 const WALK := "Gunter_Walking"
 
-const WALK_SPEED := 1.2
+const WALK_SPEED := 0.6
 const WALK_DISTANCE := 5.0
 
 const MIN_SIT_TIME := 15.0
@@ -21,6 +21,8 @@ const WALKS_BEFORE_RETURN := 2
 
 var home_position: Vector3
 var walks_done := 0
+var target_position: Vector3
+var walking := false
 
 
 func _ready():
@@ -39,7 +41,6 @@ func _ready():
 
 	home_position = global_position
 
-	# Start sitting.
 	setup_animation(SIT_IDLE, true)
 	play_animation(SIT_IDLE)
 
@@ -52,6 +53,54 @@ func _ready():
 	start_working()
 
 
+func _physics_process(_delta):
+	if not walking:
+		return
+
+	var direction := global_position.direction_to(target_position)
+	direction.y = 0.0
+
+	var distance := global_position.distance_to(target_position)
+
+	print(
+		"GUNTER: distance = ",
+		distance,
+		" target = ",
+		target_position,
+		" current = ",
+		global_position
+	)
+
+	# Reached destination
+	if distance < 0.15:
+		velocity = Vector3.ZERO
+		walking = false
+		return
+
+	direction = direction.normalized()
+
+	# Face the direction Günter is travelling
+	if direction.length() > 0.01:
+		var target_rotation := atan2(direction.x, direction.z)
+
+		rotation.y = lerp_angle(
+			rotation.y,
+			target_rotation,
+			0.15
+		)
+
+	velocity.x = direction.x * WALK_SPEED
+	velocity.z = direction.z * WALK_SPEED
+	velocity.y = 0.0
+
+	move_and_slide()
+
+	# Stop if his collision capsule is blocked
+	if get_slide_collision_count() > 0:
+		velocity = Vector3.ZERO
+		walking = false
+
+		print("GUNTER: Obstacle encountered")
 func setup_animation(animation_name: String, looping: bool):
 	var animation = animation_player.get_animation(animation_name)
 
@@ -68,21 +117,24 @@ func setup_animation(animation_name: String, looping: bool):
 		animation.loop_mode = Animation.LOOP_NONE
 
 
-func play_animation(animation_name: String):
+func play_animation(
+	animation_name: String,
+	blend_time: float = 0.25,
+	speed: float = 1.0
+):
 	if animation_player.has_animation(animation_name):
-		animation_player.play(animation_name)
+		animation_player.play(animation_name, blend_time, speed)
 	else:
 		push_error(
 			"GUNTER: Missing animation: "
 			+ animation_name
 		)
 
-
 func start_working():
 	print("GUNTER: Getting up")
 
 	setup_animation(SIT_TO_STAND, false)
-	play_animation(SIT_TO_STAND)
+	play_animation(SIT_TO_STAND, 0.25)
 
 	await animation_player.animation_finished
 
@@ -104,31 +156,19 @@ func walk_somewhere():
 		randf_range(-WALK_DISTANCE, WALK_DISTANCE)
 	)
 
-	var target_position := home_position + random_offset
+	target_position = home_position + random_offset
 
 	setup_animation(WALK, true)
-	play_animation(WALK)
+	play_animation(WALK, 0.25)
 
-	var distance := global_position.distance_to(target_position)
-	var travel_time := distance / WALK_SPEED
+	walking = true
 
-	var tween := create_tween()
-
-	tween.tween_property(
-		self,
-		"global_position",
-		target_position,
-		travel_time
-	)
-
-	await tween.finished
-
-	animation_player.stop()
+	await wait_until_stopped()
 
 	print("GUNTER: Stopping for a breather")
 
 	setup_animation(BREATHING_IDLE, true)
-	play_animation(BREATHING_IDLE)
+	play_animation(BREATHING_IDLE, 0.35)
 
 	await get_tree().create_timer(
 		randf_range(
@@ -142,35 +182,32 @@ func walk_somewhere():
 	walk_somewhere()
 
 
+func wait_until_stopped():
+	while walking:
+		await get_tree().process_frame
+
+
 func return_to_stool():
 	print("GUNTER: Returning to stool")
 
+	target_position = home_position
+
 	setup_animation(WALK, true)
-	play_animation(WALK)
+	play_animation(WALK, 0.25)
 
-	var distance := global_position.distance_to(home_position)
-	var travel_time := distance / WALK_SPEED
+	walking = true
 
-	var tween := create_tween()
-
-	tween.tween_property(
-		self,
-		"global_position",
-		home_position,
-		travel_time
-	)
-
-	await tween.finished
+	await wait_until_stopped()
 
 	print("GUNTER: Sitting down")
 
 	setup_animation(STAND_TO_SIT, false)
-	play_animation(STAND_TO_SIT)
+	play_animation(STAND_TO_SIT, 0.25)
 
 	await animation_player.animation_finished
 
 	setup_animation(SIT_IDLE, true)
-	play_animation(SIT_IDLE)
+	play_animation(SIT_IDLE, 0.25)
 
 	print("GUNTER: Back on stool")
 

@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://byi3ypq363juu" path="res://StoreAssets/StockRoomFloor.jpg" id="6_7iuwd"]
 [ext_resource type="PackedScene" uid="uid://casa0vab7r6d6" path="res://StoreAssets/NPC/Gunter/Gunter_Master.glb" id="8_nxxjm"]
 [ext_resource type="PackedScene" uid="uid://cpxoyvqtfy5ho" path="res://StoreAssets/NPC/Gunter/GuntersStool.fbx" id="8_uiexh"]
+[ext_resource type="Script" uid="uid://qsdnfjjmpd5t" path="res://StoreAssets/NPC/Gunter/gunter_idle.gd" id="9_uiexh"]
+[ext_resource type="PackedScene" uid="uid://dc36gyqsablqp" path="res://StoreAssets/NPC/Gunter/PuppyPlayhouse.glb" id="10_g84sd"]
+[ext_resource type="Texture2D" uid="uid://dphi2m70v1vr2" path="res://StoreAssets/NPC/Gunter/GÜNTERS Do Not Touch Note.png" id="11_sgl0o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huyxd"]
 albedo_texture = ExtResource("1_fy3ub")
@@ -54,189 +57,22 @@ albedo_texture = ExtResource("2_huyxd")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4djp"]
 albedo_texture = ExtResource("6_7iuwd")
 
-[sub_resource type="GDScript" id="GDScript_nxxjm"]
-script/source = "extends Node3D
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dl8kl"]
 
-@onready var animation_player: AnimationPlayer = find_child(\"AnimationPlayer\", true)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6wp04"]
 
-const SIT_TO_STAND := \"Gunter_Standup\"
-const STAND_TO_SIT := \"Gunter_Sitting_Down\"
-const SIT_IDLE := \"Gunter_Sitting_Idle\"
-const BREATHING_IDLE := \"Breathing_Idle\"
-const WALK := \"Gunter_Walking\"
+[sub_resource type="BoxShape3D" id="BoxShape3D_dl8kl"]
 
-const WALK_SPEED := 1.2
-const WALK_DISTANCE := 5.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dl8kl"]
 
-const MIN_SIT_TIME := 15.0
-const MAX_SIT_TIME := 35.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wp04"]
+albedo_color = Color(0.38170326, 0.38170323, 0.38170323, 1)
 
-const MIN_BREATHER_TIME := 2.0
-const MAX_BREATHER_TIME := 5.0
+[sub_resource type="QuadMesh" id="QuadMesh_dl8kl"]
 
-const WALKS_BEFORE_RETURN := 2
-
-var home_position: Vector3
-var walks_done := 0
-
-
-func _ready():
-	print(\"GUNTER: Starting\")
-
-	if animation_player == null:
-		push_error(\"GUNTER: AnimationPlayer not found\")
-		return
-
-	print(\"GUNTER: AnimationPlayer found\")
-
-	print(\"GUNTER: Available animations:\")
-
-	for animation_name in animation_player.get_animation_list():
-		print(\"  -> \", animation_name)
-
-	home_position = global_position
-
-	# Start sitting.
-	setup_animation(SIT_IDLE, true)
-	play_animation(SIT_IDLE)
-
-	print(\"GUNTER: Sitting idle\")
-
-	await get_tree().create_timer(
-		randf_range(MIN_SIT_TIME, MAX_SIT_TIME)
-	).timeout
-
-	start_working()
-
-
-func setup_animation(animation_name: String, looping: bool):
-	var animation = animation_player.get_animation(animation_name)
-
-	if animation == null:
-		push_error(
-			\"GUNTER: Animation not found: \"
-			+ animation_name
-		)
-		return
-
-	if looping:
-		animation.loop_mode = Animation.LOOP_LINEAR
-	else:
-		animation.loop_mode = Animation.LOOP_NONE
-
-
-func play_animation(animation_name: String):
-	if animation_player.has_animation(animation_name):
-		animation_player.play(animation_name)
-	else:
-		push_error(
-			\"GUNTER: Missing animation: \"
-			+ animation_name
-		)
-
-
-func start_working():
-	print(\"GUNTER: Getting up\")
-
-	setup_animation(SIT_TO_STAND, false)
-	play_animation(SIT_TO_STAND)
-
-	await animation_player.animation_finished
-
-	walks_done = 0
-
-	walk_somewhere()
-
-
-func walk_somewhere():
-	if walks_done >= WALKS_BEFORE_RETURN:
-		return_to_stool()
-		return
-
-	print(\"GUNTER: Going for a wander\")
-
-	var random_offset := Vector3(
-		randf_range(-WALK_DISTANCE, WALK_DISTANCE),
-		0.0,
-		randf_range(-WALK_DISTANCE, WALK_DISTANCE)
-	)
-
-	var target_position := home_position + random_offset
-
-	setup_animation(WALK, true)
-	play_animation(WALK)
-
-	var distance := global_position.distance_to(target_position)
-	var travel_time := distance / WALK_SPEED
-
-	var tween := create_tween()
-
-	tween.tween_property(
-		self,
-		\"global_position\",
-		target_position,
-		travel_time
-	)
-
-	await tween.finished
-
-	animation_player.stop()
-
-	print(\"GUNTER: Stopping for a breather\")
-
-	setup_animation(BREATHING_IDLE, true)
-	play_animation(BREATHING_IDLE)
-
-	await get_tree().create_timer(
-		randf_range(
-			MIN_BREATHER_TIME,
-			MAX_BREATHER_TIME
-		)
-	).timeout
-
-	walks_done += 1
-
-	walk_somewhere()
-
-
-func return_to_stool():
-	print(\"GUNTER: Returning to stool\")
-
-	setup_animation(WALK, true)
-	play_animation(WALK)
-
-	var distance := global_position.distance_to(home_position)
-	var travel_time := distance / WALK_SPEED
-
-	var tween := create_tween()
-
-	tween.tween_property(
-		self,
-		\"global_position\",
-		home_position,
-		travel_time
-	)
-
-	await tween.finished
-
-	print(\"GUNTER: Sitting down\")
-
-	setup_animation(STAND_TO_SIT, false)
-	play_animation(STAND_TO_SIT)
-
-	await animation_player.animation_finished
-
-	setup_animation(SIT_IDLE, true)
-	play_animation(SIT_IDLE)
-
-	print(\"GUNTER: Back on stool\")
-
-	await get_tree().create_timer(
-		randf_range(MIN_SIT_TIME, MAX_SIT_TIME)
-	).timeout
-
-	start_working()
-"
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvie0"]
+albedo_color = Color(0.8507338, 0.8857909, 0.3155509, 1)
+albedo_texture = ExtResource("11_sgl0o")
 
 [node name="Store" type="Node3D" unique_id=1392224250]
 
@@ -247,39 +83,39 @@ use_collision = true
 size = Vector3(24, 0.2, 18)
 
 [node name="BackWall" type="CSGBox3D" parent="." unique_id=1764213951]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -9)
 material_override = SubResource("StandardMaterial3D_sbsj4")
 use_collision = true
-size = Vector3(24, 3, 0.3)
+size = Vector3(24, 12, 0.3)
 
 [node name="LeftWall" type="CSGBox3D" parent="." unique_id=2053197444]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 6, 2)
 material_override = SubResource("StandardMaterial3D_ne8o5")
 use_collision = true
-size = Vector3(0.3, 3, 15)
+size = Vector3(0.3, 12, 15)
 
 [node name="RightWall" type="CSGBox3D" parent="." unique_id=1006443199]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 0)
 material_override = SubResource("StandardMaterial3D_7iuwd")
 use_collision = true
-size = Vector3(0.3, 3, 18)
+size = Vector3(0.3, 12, 18)
 
 [node name="FrontWallLeft" type="CSGBox3D" parent="." unique_id=173484723]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.5, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 6, 9)
 material_override = SubResource("StandardMaterial3D_nxxjm")
 use_collision = true
-size = Vector3(9.5, 3, 0.3)
+size = Vector3(9.5, 12, 0.3)
 
 [node name="FrontWallRight" type="CSGBox3D" parent="." unique_id=1207945618]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.5, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 6, 9)
 material_override = SubResource("StandardMaterial3D_uiexh")
 use_collision = true
-size = Vector3(9.5, 3, 0.3)
+size = Vector3(9.5, 12, 0.3)
 
 [node name="Door" type="CSGBox3D" parent="." unique_id=1675680414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 9)
 use_collision = true
-size = Vector3(4, 2.5, 0.2)
+size = Vector3(6, 3.5, 0.2)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1123481377]
 transform = Transform3D(0.8660254, 0.38302222, -0.32139382, 0, 0.64278764, 0.76604444, 0.5, -0.66341394, 0.5566704, 0, 0, 0)
@@ -296,28 +132,28 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.017, 1.5, -11.364454)
 material_override = SubResource("StandardMaterial3D_jycxk")
 use_collision = true
-size = Vector3(0.3, 3, 12)
+size = Vector3(0.3, 12, 12)
 material = SubResource("StandardMaterial3D_g84sd")
 
 [node name="StockRoomRightWall" type="CSGBox3D" parent="." unique_id=495380900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -13.0546875)
 material_override = SubResource("StandardMaterial3D_s40j1")
 use_collision = true
-size = Vector3(0.3, 3, 8.390625)
+size = Vector3(0.3, 12, 8.391)
 material = SubResource("StandardMaterial3D_sgl0o")
 
 [node name="StockRoomFrontWall" type="CSGBox3D" parent="." unique_id=1784360648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1.5, -5.3644543)
 material_override = SubResource("StandardMaterial3D_br8al")
 use_collision = true
-size = Vector3(12, 3, 0.3)
+size = Vector3(12, 12, 0.3)
 material = SubResource("StandardMaterial3D_bosbd")
 
 [node name="StockRoomBackWall" type="CSGBox3D" parent="." unique_id=774238363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1.5, -17.364454)
 material_override = SubResource("StandardMaterial3D_ojaad")
 use_collision = true
-size = Vector3(12, 3, 0.3)
+size = Vector3(12, 12, 0.3)
 material = SubResource("StandardMaterial3D_s6qn6")
 
 [node name="StockRoomFloor" type="CSGBox3D" parent="." unique_id=2005569616]
@@ -329,6 +165,44 @@ size = Vector3(12, 0.2, 12)
 [node name="GuntersStool" parent="." unique_id=2039179292 instance=ExtResource("8_uiexh")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0.51872456, 0.01364376, -0.57290626)
 
-[node name="Gunter_Master" parent="." unique_id=1564164699 instance=ExtResource("8_nxxjm")]
+[node name="StaticBody3D" type="StaticBody3D" parent="GuntersStool" unique_id=256954066]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GuntersStool/StaticBody3D" unique_id=2043468871]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.1371531, 0)
+shape = SubResource("CylinderShape3D_dl8kl")
+
+[node name="Gunter" type="CharacterBody3D" parent="." unique_id=135808739]
+script = ExtResource("9_uiexh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gunter" unique_id=1805562015]
+transform = Transform3D(-1.4, 0, -1.2239188e-07, 0, 1.4, 0, 1.2239188e-07, 0, -1.4, 0.56217194, 1.4333388, -0.36955976)
+shape = SubResource("CapsuleShape3D_6wp04")
+
+[node name="Gunter_Master" parent="Gunter" unique_id=1564164699 instance=ExtResource("8_nxxjm")]
 transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0.56217194, 0, -0.46217346)
-script = SubResource("GDScript_nxxjm")
+
+[node name="PuppyPlayhouse" parent="." unique_id=1951329146 instance=ExtResource("10_g84sd")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -16.482368, 0.85186744, -15.85854)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PuppyPlayhouse" unique_id=1630962896]
+transform = Transform3D(1.9524618, 0, 0, 0, 4.0728054, 0, 0, 0, 1.380408, 0, 0.9486753, 0.3350258)
+shape = SubResource("BoxShape3D_dl8kl")
+
+[node name="PlugSocket" type="CSGBox3D" parent="." unique_id=1062955229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.087505, 0.49141073, -17.235947)
+size = Vector3(0.45, 0.35, 0.1)
+material = SubResource("StandardMaterial3D_dl8kl")
+
+[node name="Switch" type="CSGBox3D" parent="PlugSocket" unique_id=1389442112]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0.15, 0.099999994, 0.04576067)
+size = Vector3(0.05, 0.08, 0.03)
+
+[node name="Plug" type="CSGBox3D" parent="PlugSocket" unique_id=655588713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0761715)
+size = Vector3(0.12, 0.12, 0.12)
+material = SubResource("StandardMaterial3D_6wp04")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=84693948]
+transform = Transform3D(0.35, 0, 0, 0, 0.33807403, 0.25881907, 0, -0.09058668, 0.9659258, -15.875312, 2.3914156, -15.428801)
+mesh = SubResource("QuadMesh_dl8kl")
+surface_material_override/0 = SubResource("StandardMaterial3D_rvie0")

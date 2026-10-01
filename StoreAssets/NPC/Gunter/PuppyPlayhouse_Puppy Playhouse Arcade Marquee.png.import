@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwwst075ocx3k"
-path.s3tc="res://.godot/imported/GunterSitIdle_Boss_diffuse.png-1e75160b4ec0a9e6b2b7bc58265c2b91.s3tc.ctex"
+uid="uid://ddx3efi7ltfc3"
+path.s3tc="res://.godot/imported/PuppyPlayhouse_Puppy Playhouse Arcade Marquee.png-fb27444acc3d13633b8979194ba5080d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d6dcb50f00616bc487ddb3034e50100b"
+"md5": "beee5269460d4526ee7d944311a08a4d"
 }
 
 [deps]
 
-source_file="res://StoreAssets/NPC/Gunter/GunterSitIdle_Boss_diffuse.png"
-dest_files=["res://.godot/imported/GunterSitIdle_Boss_diffuse.png-1e75160b4ec0a9e6b2b7bc58265c2b91.s3tc.ctex"]
+source_file="res://StoreAssets/NPC/Gunter/PuppyPlayhouse_Puppy Playhouse Arcade Marquee.png"
+dest_files=["res://.godot/imported/PuppyPlayhouse_Puppy Playhouse Arcade Marquee.png-fb27444acc3d13633b8979194ba5080d.s3tc.ctex"]
 
 [params]
 
